@@ -2264,7 +2264,7 @@ table.quota-info td.root {
 	top: 32px;
 	left: 90px;
 	width: auto;
-	max-height: 70%;
+	max-height: 90%;
 	overflow: -moz-scrollbars-vertical;
 	overflow-y: auto;
 	background: #444;

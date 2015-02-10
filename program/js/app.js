@@ -6908,8 +6908,9 @@ function rcube_webmail()
         .appendTo($('body')).show();
 
       // set max-height if the list is long
-      if (rows.length > 10)
-        container.css('max-height', $('li', container)[0].offsetHeight * 10 + 9);
+      var max_folders_shown = 25;
+      if (rows.length > max_folders_shown)
+        container.css('max-height', $('li', container)[0].offsetHeight * max_folders_shown + 9);
 
       // register delegate event handler for folder item clicks
       container.on('click', 'a.active', function(e){
