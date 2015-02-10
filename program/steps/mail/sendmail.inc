@@ -414,6 +414,10 @@ else {
 
     $message_body = $plugin['body'];
 
+    $noflow_recipients_regex = $RCMAIL->config->get('noflow_recipients_regex', false);
+    if ($noflow_recipients_regex !== false && (preg_match($noflow_recipients_regex, $mailcc) || preg_match($noflow_recipients_regex, $mailto))) {
+        ; // do nothing
+    } else
     // compose format=flowed content if enabled
     if ($flowed = ($savedraft || $RCMAIL->config->get('send_format_flowed', true)))
         $message_body = rcube_mime::format_flowed($message_body, min($LINE_LENGTH+2, 79), $message_charset);
