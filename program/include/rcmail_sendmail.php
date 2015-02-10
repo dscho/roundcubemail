@@ -338,6 +338,11 @@ class rcmail_sendmail
         else {
             $body = $plugin['body'];
 
+            $noflow_recipients_regex = $this->rcmail->config->get('noflow_recipients_regex', false);
+            if ($noflow_recipients_regex !== false && (preg_match($noflow_recipients_regex, $headers['Cc']) || preg_match($noflow_recipients_regex, $headers['To']))) {
+                $flowed = false;
+            }
+
             // compose format=flowed content if enabled
             if ($flowed) {
                 $body = rcube_mime::format_flowed($body, min($line_length + 2, 79), $charset);
