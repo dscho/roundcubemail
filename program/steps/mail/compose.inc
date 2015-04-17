@@ -344,9 +344,6 @@ foreach ($parts as $header) {
                 $fvalue .= $v;
             if ($v = $MESSAGE->headers->cc)
                 $fvalue .= (!empty($fvalue) ? $separator : '') . $v;
-            // Use Sender header (#1489011)
-            if (($v = $MESSAGE->headers->get('Sender', false)) && strpos($v, '-bounces@') === false)
-                $fvalue .= (!empty($fvalue) ? $separator : '') . $v;
 
             // When To: and Reply-To: are the same we add From: address to the list (#1489037)
             if ($v = $MESSAGE->headers->from) {
