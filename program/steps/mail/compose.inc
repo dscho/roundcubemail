@@ -636,13 +636,6 @@ function rcmail_compose_header_value($header)
             if ($v = $MESSAGE->headers->cc) {
                 $fvalue .= (!empty($fvalue) ? $separator : '') . $v;
             }
-            // Use Sender header (#1489011)
-            if ($v = $MESSAGE->headers->get('Sender', false)) {
-                // Skip common mailing lists addresses: *-bounces@ and *-request@ (#1490452)
-                if (empty($MESSAGE->headers->others['list-post']) || !preg_match('/-(bounces|request)@/', $v)) {
-                    $fvalue .= (!empty($fvalue) ? $separator : '') . $v;
-                }
-            }
 
             // When To: and Reply-To: are the same we add From: address to the list (#1489037)
             if ($v = $MESSAGE->headers->from) {
