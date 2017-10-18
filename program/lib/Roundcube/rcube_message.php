@@ -115,6 +115,16 @@ class rcube_message
                 false, false, true)
         );
 
+	if (empty($_GET["_format"])) {
+		$regex = $this->app->config->get('prefer_html_from_regex');
+		$from = $this->headers->replyto;
+		if (preg_match('/, ' . $regex . ', /', ', ' . $from . ', ')) {
+			$this->opt['prefer_html'] = 1;
+			$this->app->config->set('prefer_html', 1);
+			$this->app->config->set('show_images', 1);
+		}
+	}
+
         if (!empty($this->headers->structure)) {
             $this->get_mime_numbers($this->headers->structure);
             $this->parse_structure($this->headers->structure);
